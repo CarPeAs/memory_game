@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #333;
+    cursor: grab;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+    /* background-color: #0f0; /* Color verde para indicar que la tarjeta está "volteada" */
+}
+
+.card-text {
+    /*font-weight: bold;
+    user-select: none; /* Evita que el texto pueda ser seleccionado */
+    font-size: 20px;  /* Asegúrate de que el tamaño del texto sea adecuado para la tarjeta*/
+    color: white;  /* El color del texto, ajusta según el diseño de tu tarjeta*/
+    font-weight: bold;
+    user-select: none;  //* Evita que el texto pueda ser seleccionado */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card.flip .card-text {
+    display: flex;  /*Muestra el texto cuando la tarjeta está volteada*/
+}
+
+/* Estilo cuando la tarjeta está volteada correctamente */
+.card.match {
+    background-color: #4CAF50; /* Verde */
+}
+
+/* Estilo cuando la tarjeta no coincide */
+.card.wrong {
+    background-color: #f44336; /* Rojo */
+    animation: shake 0.5s; /* Agrega una pequeña animación para indicar error */
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20%, 60% {
+        transform: translateX(-10px);
+    }
+    40%, 80% {
+        transform: translateX(10px);
+    }
+}
