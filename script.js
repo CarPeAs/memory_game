@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardText = document.createElement('div');
             cardText.classList.add('card-text');
             cardText.textContent = card;  // Asigna el valor de la carta
-            cardText.style.display = 'none';  // Oculta el texto inicialmente
+            //cardText.style.display = 'none';  // Oculta el texto inicialmente
 
             cardElement.appendChild(cardText);  // Agrega el texto a la tarjeta
             cardElement.dataset.value = card;
@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             firstCard.classList.remove('flip', 'wrong');
             secondCard.classList.remove('flip', 'wrong');
-
             resetBoard();
         }, 1500);
     }

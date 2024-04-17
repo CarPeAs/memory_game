@@ -24,44 +24,50 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 50px;
-    color: #333;
+    /*color: #333;*/
     cursor: grab;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
-
-.card.flip {
-    transform: rotateY(180deg);
-    /* background-color: #0f0; /* Color verde para indicar que la tarjeta está "volteada" */
+    position: relative;
+    perspective: 1000px; 
+    transition: transform 0.3s; 
+    transform-style: preserve-3d; /* Asegura que los hijos se muevan en 3D */
 }
 
 .card-text {
-    /*font-weight: bold;
-    user-select: none; /* Evita que el texto pueda ser seleccionado */
-    font-size: 20px;  /* Asegúrate de que el tamaño del texto sea adecuado para la tarjeta*/
-    color: white;  /* El color del texto, ajusta según el diseño de tu tarjeta*/
-    font-weight: bold;
-    user-select: none;  //* Evita que el texto pueda ser seleccionado */
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    font-size: 40px; 
+    /*color: black;  */
+    user-select: none;  //* Evita que el texto pueda ser seleccionado */
+    backface-visibility: hidden;
+    color: transparent; /* Oculta el texto cambiando su color */
+    transition:  color 0.3s; /* Transiciones suaves para transform y color */
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+    background-color: rgb(242, 0, 255);
 }
 
 .card.flip .card-text {
-    display: flex;  /*Muestra el texto cuando la tarjeta está volteada*/
+    /*display: flex; */
+    color: goldenrod;
+    transform: rotateY(-180deg); /* Voltea el texto en la dirección opuesta para corregir la orientación */
 }
 
 /* Estilo cuando la tarjeta está volteada correctamente */
 .card.match {
-    background-color: #4CAF50; /* Verde */
+    background-color: #4CAF50;
 }
 
 /* Estilo cuando la tarjeta no coincide */
 .card.wrong {
-    background-color: #f44336; /* Rojo */
-    animation: shake 0.5s; /* Agrega una pequeña animación para indicar error */
+    background-color: #f44336; 
+    animation: shake 0.5s;
 }
 
 @keyframes shake {
