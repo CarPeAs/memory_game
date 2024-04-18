@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-     // Función para manejar el volteo de las tarjetas
+     /* Función para manejar el volteo de las tarjetas v1
      function flipCard() {
-        if (lockBoard) return;
+        if (lockBoard || this.classList.contains('flip')) return;
         if (this === firstCard) return;
 
         this.classList.toggle('flip');
@@ -51,6 +51,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // Segundo clic
         secondCard = this;
         checkForMatch();
+    }*/
+    function flipCard() {
+        if (lockBoard || this.classList.contains('flip')) return;
+        
+        this.classList.add('flip');
+        
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+            return;
+        }
+    
+        if (firstCard.dataset.value === this.dataset.value) {
+            firstCard.classList.add('match');
+            this.classList.add('match');
+            resetBoard();
+        } else {
+            firstCard.classList.add('wrong');
+            this.classList.add('wrong');
+            setTimeout(() => {
+                firstCard.classList.remove('flip', 'wrong');
+                this.classList.remove('flip', 'wrong');
+                resetBoard();
+            }, 1500);
+        }
     }
 
     // Función para comprobar si las tarjetas coinciden

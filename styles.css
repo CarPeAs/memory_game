@@ -24,13 +24,14 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 50px;
-    /*color: #333;*/
     cursor: grab;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     position: relative;
-    perspective: 1000px; 
-    transition: transform 0.3s; 
+    perspective: 1000px;
     transform-style: preserve-3d; /* Asegura que los hijos se muevan en 3D */
+    /*transform-style: flat;*/ 
+    transition: transform 0.3s; 
+    
 }
 
 .card-text {
@@ -41,11 +42,11 @@ body {
     align-items: center;
     font-weight: bold;
     font-size: 40px; 
-    /*color: black;  */
-    user-select: none;  //* Evita que el texto pueda ser seleccionado */
+    user-select: none;  /* Evita que el texto pueda ser seleccionado */
     backface-visibility: hidden;
     color: transparent; /* Oculta el texto cambiando su color */
     transition:  color 0.3s; /* Transiciones suaves para transform y color */
+    transform: rotateY(180deg);
 }
 
 .card.flip {
@@ -54,9 +55,8 @@ body {
 }
 
 .card.flip .card-text {
-    /*display: flex; */
     color: goldenrod;
-    transform: rotateY(-180deg); /* Voltea el texto en la dirección opuesta para corregir la orientación */
+    transform: rotateY(180deg);
 }
 
 /* Estilo cuando la tarjeta está volteada correctamente */
@@ -68,16 +68,17 @@ body {
 .card.wrong {
     background-color: #f44336; 
     animation: shake 0.5s;
+    transition: transform 0.5s 0.5s; /* Retrasa la transición de transformación para mantener la tarjeta volteada durante la animación*/
 }
 
 @keyframes shake {
     0%, 100% {
-        transform: translateX(0);
+        transform: translateX(0) rotateY(180deg);
     }
     20%, 60% {
-        transform: translateX(-10px);
+        transform: translateX(-10px) rotateY(180deg);
     }
     40%, 80% {
-        transform: translateX(10px);
+        transform: translateX(10px) rotateY(180deg);
     }
 }
