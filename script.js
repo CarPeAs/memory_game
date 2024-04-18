@@ -34,24 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-     /* Función para manejar el volteo de las tarjetas v1
-     function flipCard() {
-        if (lockBoard || this.classList.contains('flip')) return;
-        if (this === firstCard) return;
-
-        this.classList.toggle('flip');
-
-        if (!hasFlippedCard) {
-            // Primer clic
-            hasFlippedCard = true;
-            firstCard = this;
-            return;
-        }
-
-        // Segundo clic
-        secondCard = this;
-        checkForMatch();
-    }*/
+     // Función para manejar el volteo de las tarjetas
     function flipCard() {
         if (lockBoard || this.classList.contains('flip')) return;
         
@@ -70,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             firstCard.classList.add('wrong');
             this.classList.add('wrong');
+            lockBoard = true;
             setTimeout(() => {
                 firstCard.classList.remove('flip', 'wrong');
                 this.classList.remove('flip', 'wrong');

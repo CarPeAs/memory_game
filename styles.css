@@ -30,7 +30,10 @@ body {
     perspective: 1000px;
     transform-style: preserve-3d; /* Asegura que los hijos se muevan en 3D */
     /*transform-style: flat;*/ 
-    transition: transform 0.3s; 
+    transition: transform 0.3s, background-color 0.3s;
+    background-image: url('img/back.jpg');
+    background-size: cover;
+    background-position: center;
     
 }
 
@@ -45,13 +48,14 @@ body {
     user-select: none;  /* Evita que el texto pueda ser seleccionado */
     backface-visibility: hidden;
     color: transparent; /* Oculta el texto cambiando su color */
-    transition:  color 0.3s; /* Transiciones suaves para transform y color */
+    transition:  color 0.3;
     transform: rotateY(180deg);
 }
 
 .card.flip {
     transform: rotateY(180deg);
     background-color: rgb(242, 0, 255);
+    background-image: none;
 }
 
 .card.flip .card-text {
