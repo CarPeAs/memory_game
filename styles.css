@@ -37,6 +37,10 @@ body {
     
 }
 
+.reset-button{
+    color: #f44336;
+}
+
 .card-text {
     width: 100%;
     height: 100%;
