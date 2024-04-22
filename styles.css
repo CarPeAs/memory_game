@@ -1,44 +1,63 @@
 body {
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Ordena los elementos en columna */
+    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
     height: 100vh;
     background-color: #f0f0f0;
-    margin: 0;
 }
 
 .game-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    width: 80%;
-    max-width: 600px;
+    width: calc(100% - 40px); /* Calcula el ancho basado en el tamaño de la pantalla menos el padding */
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    align-content: center; /* Alinea el contenido de la cuadrícula */
+}
+
+/* Estilos para los diferentes niveles que se añadirían en función del nivel actual mediante JavaScript */
+.game-container.level-1 {
+    grid-template-columns: repeat(2, minmax(120px, auto));
+    grid-template-rows: repeat(2, minmax(120px, auto));
+}
+
+.game-container.level-2 {
+    grid-template-columns: repeat(4, minmax(120px, auto));
+    grid-template-rows: repeat(2, minmax(120px, auto));
+}
+
+.game-container.level-3 {
+    grid-template-columns: repeat(4, minmax(120px, auto));
+    grid-template-rows: repeat(3, minmax(120px, auto));
+}
+
+.game-container.level-4 {
+    grid-template-columns: repeat(8, minmax(120px, auto));
+    grid-template-rows: repeat(4, minmax(120px, auto));
 }
 
 .card {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    height: 150px;
+    aspect-ratio: 1 / 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: calc(5vw + 10px); /* Ajusta el tamaño del texto con el ancho de la pantalla */
     cursor: grab;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: relative;
-    perspective: 1000px;
-    transform-style: preserve-3d; /* Asegura que los hijos se muevan en 3D */
-    /*transform-style: flat;*/ 
     transition: transform 0.3s, background-color 0.3s;
-    background-image: url('img/back.jpg');
+    transform-style: preserve-3d; 
     background-size: cover;
     background-position: center;
-    
-}
-
-.reset-button{
-    color: #f44336;
+    background-image: url('img/back.jpg');
 }
 
 .card-text {
@@ -52,8 +71,9 @@ body {
     user-select: none;  /* Evita que el texto pueda ser seleccionado */
     backface-visibility: hidden;
     color: transparent; /* Oculta el texto cambiando su color */
-    transition:  color 0.3;
-    transform: rotateY(180deg);
+    /* transform: rotateY(-180deg);  */
+    transition: color 0.3s;
+  
 }
 
 .card.flip {
@@ -78,6 +98,78 @@ body {
     animation: shake 0.5s;
     transition: transform 0.5s 0.5s; /* Retrasa la transición de transformación para mantener la tarjeta volteada durante la animación*/
 }
+
+/*Botón para reiniciar el juego*/
+.resetButton {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+.resetButton:before {
+    content: "";
+    background: linear-gradient(
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+  }
+  
+  
+  
+.resetButton:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+
+@keyframes glowing-button {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 400% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+
 
 @keyframes shake {
     0%, 100% {

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     startGame();
-    document.getElementById('resetButton').addEventListener('click', resetGame);
+    document.querySelector('.resetButton').addEventListener('click', resetGame);
 });
     
 let hasFlippedCard = false;
@@ -11,13 +11,23 @@ let currentLevel = 1;
 async function setupLevel(level) {
     const gameContainer = document.querySelector('.game-container');
     gameContainer.innerHTML = ''; // Limpiar el contenedor de juego anterior
+    gameContainer.className = 'game-container'; // Restablece a la clase predeterminada
+    gameContainer.classList.add(`level-${level}`);
     let cards = await getLevelCards(level);
     cards.forEach(card => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
         cardElement.dataset.value = card;
-        cardElement.textContent = card; // Recuerda modificar es de prueba
+
+        // Crea un elemento hijo para el texto de la tarjeta
+        const cardText = document.createElement('div');
+        cardText.classList.add('card-text');
+        cardText.textContent = card;
+
+        cardElement.appendChild(cardText);
+        //cardElement.textContent = card; // Recuerda comentar es para prueba 
         gameContainer.appendChild(cardElement);
+        
         cardElement.addEventListener('click', flipCard);
     });
 }
@@ -44,7 +54,7 @@ function getLevelCards(level) {
 
 function selectRandomPairs(allCards, numPairs) {
     let pairs = [];
-    let indices = new Set(); // Usar un Set para evitar índices duplicados
+    let indices = new Set(); // Usamos un Set para evitar índices duplicados
 
     while (pairs.length < numPairs * 2) {
         let index = Math.floor(Math.random() * (allCards.length / 2));
@@ -64,27 +74,6 @@ function shuffle(array) {
     }
     return array;
 }
-
-    /* Función para crear tarjetas y agregarlas al DOM
-    function createCards() {
-        shuffle(cards);
-        cards.forEach(card => {
-            const cardElement = document.createElement('div');
-            cardElement.classList.add('card');
-
-            // Crea un elemento hijo para el texto de la tarjeta
-            const cardText = document.createElement('div');
-            cardText.classList.add('card-text');
-            cardText.textContent = card;  // Asigna el valor de la carta
-            //cardText.style.display = 'none';  // Oculta el texto inicialmente
-
-            cardElement.appendChild(cardText);  // Agrega el texto a la tarjeta
-            cardElement.dataset.value = card;
-            cardElement.addEventListener('click', flipCard);
-            gameContainer.appendChild(cardElement);
-
-        });
-    }*/
 
 // Función para manejar el volteo de las tarjetas
 function flipCard() {
@@ -115,11 +104,11 @@ function flipCard() {
 }
 
 // Función para comprobar si las tarjetas coinciden
-    function checkForMatch() {
-        let isMatch = firstCard.dataset.value === secondCard.dataset.value;
+function checkForMatch() {
+    let isMatch = firstCard.dataset.value === secondCard.dataset.value;
 
-        isMatch ? disableCards() : unflipCards();
-    }
+    isMatch ? disableCards() : unflipCards();
+}
 
 // Función para desactivar las tarjetas si coinciden
 function disableCards(card1, card2) {
@@ -141,13 +130,20 @@ function unflipCards() {
     }, 1500);
 }
 
+//Función para verificar si se ha completado un nivel
 function checkCompletion() {
     let allFlipped = document.querySelectorAll('.card.match').length;
     let totalCards = document.querySelectorAll('.card').length;
     if (allFlipped === totalCards) {
-        alert('Excelente, ahora un poco más dificil.');
-        currentLevel++;
-        setupLevel(currentLevel);
+        if (currentLevel < 4) {
+            alert('Excelente, ahora un poco más difícil.');
+            currentLevel++;
+            setupLevel(currentLevel);
+            console.log('Avanzando al nivel ' + currentLevel);
+        } else {
+            alert('¡Felicidades! Has completado todos los niveles. ¿Quieres jugar de nuevo?');
+            resetGame();
+        }
     }
 }
 
