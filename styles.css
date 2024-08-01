@@ -2,23 +2,25 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column; /* Ordena los elementos en columna */
-    justify-content: center; /* Centra los elementos verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
-    height: 100vh;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
     background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
 }
 
 .game-container {
     display: grid;
     gap: 10px;
-    width: calc(100% - 40px); /* Calcula el ancho basado en el tamaño de la pantalla menos el padding */
+    width: 90%;
+    max-width: 800px; 
     margin: 20px;
     padding: 20px;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    align-content: center; /* Alinea el contenido de la cuadrícula */
+    align-content: center;
 }
 
 /* Estilos para los diferentes niveles que se añadirían en función del nivel actual mediante JavaScript */
@@ -28,18 +30,15 @@ body {
 }
 
 .game-container.level-2 {
-    grid-template-columns: repeat(4, minmax(120px, auto));
-    grid-template-rows: repeat(2, minmax(120px, auto));
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .game-container.level-3 {
-    grid-template-columns: repeat(4, minmax(120px, auto));
-    grid-template-rows: repeat(3, minmax(120px, auto));
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .game-container.level-4 {
-    grid-template-columns: repeat(8, minmax(120px, auto));
-    grid-template-rows: repeat(4, minmax(120px, auto));
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .card {
@@ -50,7 +49,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: calc(5vw + 10px); /* Ajusta el tamaño del texto con el ancho de la pantalla */
+    font-size: calc(4vw + 10px); /* Ajusta el tamaño del texto con el ancho de la pantalla */
     cursor: grab;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s, background-color 0.3s;
@@ -67,7 +66,7 @@ body {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 40px; 
+    font-size: 2rem; 
     user-select: none;  /* Evita que el texto pueda ser seleccionado */
     backface-visibility: hidden;
     color: transparent; /* Oculta el texto cambiando su color */
